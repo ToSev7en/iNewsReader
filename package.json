@@ -1,0 +1,21 @@
+{
+  "name": "inews-reader",
+  "version": "1.0.0",
+  "description": "a news reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tosev7en",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ToSev7en/iNewsReader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ToSev7en/iNewsReader/issues"
+  },
+  "homepage": "https://github.com/ToSev7en/iNewsReader#readme"
+}
