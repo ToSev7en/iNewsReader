@@ -1,0 +1,33 @@
+{
+    // Required
+    "manifest_version": 2,
+
+    // diaplay when right click icon
+    "name": "Shanbay Read Mode",
+    "version": "1.0",
+
+    // Recommended
+    //"default_locale": "en",
+    "description": "The first extension that I made.",
+
+    // Optional
+    "author": "TSW",
+    "content_scripts": [{
+        "all_frames": true,
+        "css": ["css/style.css"],
+        "js": ["reader.js"],
+        "matches": ["http://*/*", "https://*/*"],
+        "run_at": "document_start"
+    }],
+    "browser_action": {
+        "default_icon": "shanbei.png",
+        "default_popup": "popup.html",
+        "default_title": "Toggle Read Mode."
+    },
+
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "http://api.flickr.com/"
+    ]
+}
