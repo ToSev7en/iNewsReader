@@ -8,7 +8,9 @@
   },
   "author": "tosev7en",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^3.1.1"
+  },
   "devDependencies": {},
   "repository": {
     "type": "git",

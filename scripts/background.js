@@ -1,16 +1,49 @@
 "use strict";
 
+var background = {
+    init: function() {
+        chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+            if (request.method in background) {
+                background[request.method](request, sender, sendResponse);
+            }
+        });
+    },
+
+    alertIt: function(request, sender, sendResponse) {
+        sendResponse("没有查到");
+    },
+
+    speakLouder: function(request, sender, sendResponse) {
+        chrome.tts.speak(
+            request.data, { 'lang': 'en-US', 'rate': 1.0 });
+    },
+    httpRequest: function(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                callback(xhr.responseText);
+            }
+        }
+        xhr.send();
+    }
+}
+
+// startup
+
+background.init();
+
 chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.create({
         url: chrome.extensioon.getURL("popup.html")
     });
 })
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    if (message.method === 'showAlert') {
-        alert('showAlert');
-    }
-});
+// chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+//     if (message.method === 'showAlert') {
+//         alert('showAlert');
+//     }
+// });
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
