@@ -1,33 +1,63 @@
 {
-    // Required
+    // Required 这里必须是2
     "manifest_version": 2,
-
-    // diaplay when right click icon
-    "name": "Shanbay Read Mode",
+    // 扩展名称
+    "name": "iNewsReader",
+    // 扩展版本
     "version": "1.0",
 
     // Recommended
     //"default_locale": "en",
+
+    // 扩展描述
     "description": "The first extension that I made.",
+
+    //扩展图标(在扩展中心显示)
+    "icons": {
+        "48": "images/icon_48.png",
+        "72": "images/icon_72.png",
+        "128": "images/icon_128.png"
+    },
 
     // Optional
     "author": "TSW",
+    // "content_scripts": [{
+    //     "all_frames": true,
+    //     "css": ["css/style.css"],
+    //     "js": ["*.js"],
+    //     "matches": ["http://*/*", "https://*/*"],
+    //     "run_at": "document_start"
+    // }],
+
+
+    // content_scripts，在各个浏览器页面里运行的文件，可以获取到当前页面的上下文DOM
     "content_scripts": [{
-        "all_frames": true,
-        "css": ["css/style.css"],
-        "js": ["reader.js"],
+        // matches 匹配 content_scripts 可以在哪些页面运行
         "matches": ["http://*/*", "https://*/*"],
-        "run_at": "document_start"
+        "js": ["scripts/content_script.js"]
+            // "js": ["js/vendor/jquery-3.1.1.min.js", "js/vendor/keyboard.min.js", "js/selection.js", "js/notification.js"],
+            // "css": ["css/notification.css"]
     }],
+
+    "background": {
+        "scripts": [
+            "scripts/background.js"
+        ],
+        // persistent代表“是否持久”。如果是一个单纯的全局后台js，需要一直运行，则不需配置persistent（或者为true）。当配置为false时转变为事件js，依旧存在于后台，在需要时加载，空闲时卸载
+        "persistent": false
+    },
+    // browser_action，左键点击右上角插件logo时，弹出的popup框。不填此项则点击logo不会有用
     "browser_action": {
-        "default_icon": "shanbei.png",
+        "default_icon": "images/icon_48.png",
         "default_popup": "popup.html",
         "default_title": "Toggle Read Mode."
     },
-
+    // options_page，指右键点击右上角里的插件logo时，弹出列表中的“选项”是否可点，以及在可以点击时，左键点击后打开的页面
+    "options_page": "view/options.html",
+    //权限声明
     "permissions": [
         "activeTab",
-        "tabs",
-        "http://api.flickr.com/"
+        "tabs"
+        // "http://api.flickr.com/"
     ]
 }
