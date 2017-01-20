@@ -1,0 +1,61 @@
+.word-box {
+    width: 200px;
+    height: 100px;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: wheat;
+    position: absolute;
+    top: 2%;
+    left: 4%;
+    z-index: 999999;
+    font-size: 8px;
+}
+
+.word-bar {
+    margin-bottom: 5px;
+}
+
+.wordContent {
+    text-decoration: none;
+    /*font-size: 1rem;*/
+    font-weight: bold;
+}
+
+.pronunciation {
+    vertical-align: middle;
+}
+
+.pronunciation:after {
+    clear: both;
+    content: '.';
+    display: block;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.pronunciation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pronunciation ul li {
+    float: left;
+    margin-right: 20px;
+}
+
+.word-box>audio {
+    display: none;
+}
+
+.speaker-icon {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cn-definition {
+    margin-top: -5px;
+    /*font-size: 1rem;*/
+}

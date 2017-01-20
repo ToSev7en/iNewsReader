@@ -36,7 +36,7 @@
         "matches": ["http://*/*", "https://*/*"],
         "js": ["scripts/lib/jquery.js", "scripts/util.js", "scripts/content_script.js", "scripts/read_view.js"],
         // "js": ["js/vendor/jquery-3.1.1.min.js", "js/vendor/keyboard.min.js", "js/selection.js", "js/notification.js"],
-        "css": ["css/style.css"]
+        "css": ["css/style.css", "css/word-box.css", "css/iconfont.css"]
     }],
 
     "background": {
@@ -59,6 +59,7 @@
         "activeTab",
         "tabs",
         "tts",
-        "https://api.shanbay.com"
+        "https://api.shanbay.com/"
+        // "http://api.flickr.com/"
     ]
 }
