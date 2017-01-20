@@ -16,16 +16,6 @@ var background = {
     speakLouder: function(request, sender, sendResponse) {
         chrome.tts.speak(
             request.data, { 'lang': 'en-US', 'rate': 1.0 });
-    },
-    httpRequest: function(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-                callback(xhr.responseText);
-            }
-        }
-        xhr.send();
     }
 }
 
@@ -45,11 +35,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 //     }
 // });
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        console.log(sender.tab ?
-            "来自内容脚本：" + sender.tab.url :
-            "来自扩展程序");
-        if (request.greeting == "您好")
-            sendResponse({ farewell: "再见" });
-    });
+// chrome.runtime.onMessage.addListener(
+//     function(request, sender, sendResponse) {
+//         console.log(sender.tab ?
+//             "来自内容脚本：" + sender.tab.url :
+//             "来自扩展程序");
+//         if (request.greeting == "您好")
+//             sendResponse({ farewell: "再见" });
+//     });
