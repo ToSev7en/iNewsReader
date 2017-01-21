@@ -1,12 +1,10 @@
 'use strict';
 
 $(document).ready(function() {
-
-    $("html").removeAttr("id class data-page-path");
-
+    // window.onload = function() {
 
     if (document.URL == "https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders") {
-
+        window.stop();
         if (document.readyState == 'complete') {
             chrome.runtime.sendMessage({
                 method: "speakLouder",
@@ -16,56 +14,93 @@ $(document).ready(function() {
             });
         }
 
+        $("html").removeAttr("id class data-page-path");
+        $("body").removeAttr("id class itemscope itemtype");
+
+
+
+        let list = ["style", "button", "footer", "link", "iframe", "noscript", "a", "img", "script", "div", "a"];
+
+        for (let i in list) {
+            console.log(i);
+            $(list[i]).remove();
+        }
+
+        // let htmldata;
+        Util.httpRequest('https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders', function(res) {
+            var htmldata = res;
+            console.log(htmldata);
+            console.log($(htmldata).find(".content__headline").text());
+
+            var doc = '<div class="read-wraper">' +
+                '<div class="read-view">' +
+                '<h1 class="news-title">' + $(htmldata).find(".content__headline").text() + '</h1>' +
+                '<p class="news-abstract">' + $(htmldata).find(".content__standfirst>p").text() + '</p>' +
+                '<div class="news-content"></div>' +
+                '</div>' +
+                '</div>';
+
+            $("body").append(doc);
+            var $content = $(htmldata).find(".content__article-body");
+            // ' + $(htmldata).find(".content__article-body>p").text() + '
+            $(".news-content").append($content);
+
+            $("aside").remove();
+
+        });
+
+
+
     }
 
     document.addEventListener("mouseup", function() {
-        if (window.getSelection().toString() != null && window.getSelection().toString().trim() != "") {
-            // alert(window.getSelection().toString());
-            chrome.runtime.sendMessage({
-                method: "speakLouder",
-                data: window.getSelection().toString().trim()
-            }, function(response) {
+            if (window.getSelection().toString() != null && window.getSelection().toString().trim() != "") {
+                // alert(window.getSelection().toString());
+                chrome.runtime.sendMessage({
+                    method: "speakLouder",
+                    data: window.getSelection().toString().trim()
+                }, function(response) {
 
-            });
+                });
 
-            Util.httpRequest('https://api.shanbay.com/bdc/search/?word=' + window.getSelection().toString().trim(), function(res) {
-                var json;
-                if (typeof res === 'object') {
-                    json = res;
-                } else {
-                    json = eval("(" + res + ")");
-                }
+                Util.httpRequest('https://api.shanbay.com/bdc/search/?word=' + window.getSelection().toString().trim(), function(res) {
+                    var json;
+                    if (typeof res === 'object') {
+                        json = res;
+                    } else {
+                        json = eval("(" + res + ")");
+                    }
 
-                var HTML = '<div class="word-box">' +
-                    '<audio controls="controls" src="http://dict.youdao.com/dictvoice?audio=voice&type=1"></audio>' +
-                    '<div class="word-bar"><a class="wordContent" href="#">' + json.data.content + '</a></div>' +
-                    '<div class="pronunciation">' +
-                    '<ul>' +
-                    '<li>' +
-                    '<i class="iconfont icon-iconfontsvg45 speaker-icon"></i>' +
-                    '<span>英音[<b>' + json.data.pronunciations.uk + '</b>]</span>' +
-                    '</li>' +
-                    '<li>' +
-                    '<i class="iconfont icon-speaker07 speaker-icon"></i>' +
-                    '<span>美音[<b>' + json.data.pronunciations.us + '</b>]</span>' +
-                    '</li>' +
-                    '</ul>' +
-                    '</div>' +
-                    '<div class="cn-definition">' +
-                    '<p>' + json.data.definition.trim() + '</p>' +
-                    '</div>' +
-                    '</div>';
-                var body = jQuery("body"),
-                    wb = jQuery(".word-box");
-                if (wb.length === 0) {
-                    body.append(HTML);
-                }
-            });
-        } else {
-            jQuery(".word-box").remove();
-        }
-    })
-
+                    var HTML = '<div class="word-box">' +
+                        '<audio controls="controls" src="http://dict.youdao.com/dictvoice?audio=voice&type=1"></audio>' +
+                        '<div class="word-bar"><a class="wordContent" href="#">' + json.data.content + '</a></div>' +
+                        '<div class="pronunciation">' +
+                        '<ul>' +
+                        '<li>' +
+                        '<i class="iconfont icon-iconfontsvg45 speaker-icon"></i>' +
+                        '<span>英音[<b>' + json.data.pronunciations.uk + '</b>]</span>' +
+                        '</li>' +
+                        '<li>' +
+                        '<i class="iconfont icon-speaker07 speaker-icon"></i>' +
+                        '<span>美音[<b>' + json.data.pronunciations.us + '</b>]</span>' +
+                        '</li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '<div class="cn-definition">' +
+                        '<p>' + json.data.definition.trim() + '</p>' +
+                        '</div>' +
+                        '</div>';
+                    var body = jQuery("body"),
+                        wb = jQuery(".word-box");
+                    if (wb.length === 0) {
+                        body.append(HTML);
+                    }
+                });
+            } else {
+                jQuery(".word-box").remove();
+            }
+        })
+        // }
 });
 
 

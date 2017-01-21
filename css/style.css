@@ -4,3 +4,42 @@
     width: 280px;
     height: 240px;
 }
+
+
+/*body {
+    background: red;
+}*/
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.read-wraper {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    background: wheat;
+    z-index: 9999;
+    position: absolute;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.read-view {
+    width: 60%;
+    margin: 40px auto;
+}
+
+.read-wraper p {
+    text-indent: 2em;
+    font-size: 1rem;
+    padding: 10px;
+    margin: 10px;
+}
+
+.read-wraper ul {
+    list-style: disc;
+    margin-left: 20px;
+}
