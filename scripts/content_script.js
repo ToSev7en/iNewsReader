@@ -3,60 +3,61 @@
 $(document).ready(function() {
     // window.onload = function() {
 
-    if (document.URL == "https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders") {
-        window.stop();
-        if (document.readyState == 'complete') {
-            chrome.runtime.sendMessage({
-                method: "speakLouder",
-                data: "Chrome Extension Enable"
-            }, function(response) {
+    // if (document.URL == "https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders") {
+    window.stop();
+    if (document.readyState == 'complete') {
+        chrome.runtime.sendMessage({
+            method: "speakLouder",
+            data: "Chrome Extension Enable"
+        }, function(response) {
 
-            });
-        }
-
-        $("html").removeAttr("id class data-page-path");
-        $("body").removeAttr("id class itemscope itemtype");
-
-
-
-        let list = ["style", "button", "footer", "link", "iframe", "noscript", "a", "img", "script", "div", "a"];
-
-        for (let i in list) {
-            console.log(i);
-            $(list[i]).remove();
-        }
-
-        // let htmldata;
-        Util.httpRequest('https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders', function(res) {
-            var htmldata = res;
-            console.log(htmldata);
-            console.log($(htmldata).find(".content__headline").text());
-            // alert($(htmldata).find(".article__img-container img").attr("src"));
-            var doc = '<div class="read-wraper">' +
-                '<div class="read-view">' +
-                '<h1 class="news-title">' + $(htmldata).find(".content__headline").text() + '</h1>' +
-                '<p class="news-abstract">' + $(htmldata).find(".content__standfirst>p").text() + '</p>' +
-
-                '<div class="news-content"></div>' +
-                '</div>' +
-                '</div>';
-
-            $("body").append(doc);
-            var $content = $(htmldata).find(".content__article-body");
-            var $picture = $(htmldata).find(".article__img-container picture");
-            // ' + $(htmldata).find(".content__article-body>p").text() + '
-            $(".news-content").append($content);
-
-            $(".news-abstract").after($picture);
-
-
-            $("aside").remove();
-            // '<img src="#"/>' +
-            // $("img").attr("src", $(htmldata).find(".article__img-container img").attr("src"));
-            // // alert($(htmldata).find(".article__img-container img").attr("src"));
-            // alert($(res).find(".article__img-container img").attr("src"));
         });
     }
+
+    $("html").removeAttr("id class data-page-path");
+    $("body").removeAttr("id class itemscope itemtype");
+
+
+
+    let list = ["style", "button", "footer", "link", "iframe", "noscript", "a", "img", "script", "div", "a"];
+
+    for (let i in list) {
+        console.log(i);
+        $(list[i]).remove();
+    }
+
+    // let htmldata;
+    // 'https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders'
+    Util.httpRequest(document.URL, function(res) {
+        var htmldata = res;
+        console.log(htmldata);
+        console.log($(htmldata).find(".content__headline").text());
+        // alert($(htmldata).find(".article__img-container img").attr("src"));
+        var doc = '<div class="read-wraper">' +
+            '<div class="read-view">' +
+            '<h1 class="news-title">' + $(htmldata).find(".content__headline").text() + '</h1>' +
+            '<p class="news-abstract">' + $(htmldata).find(".content__standfirst>p").text() + '</p>' +
+
+            '<div class="news-content"></div>' +
+            '</div>' +
+            '</div>';
+
+        $("body").append(doc);
+        var $content = $(htmldata).find(".content__article-body");
+        var $picture = $(htmldata).find(".article__img-container picture");
+        // ' + $(htmldata).find(".content__article-body>p").text() + '
+        $(".news-content").append($content);
+
+        $(".news-abstract").after($picture);
+
+
+        $("aside").remove();
+        // '<img src="#"/>' +
+        // $("img").attr("src", $(htmldata).find(".article__img-container img").attr("src"));
+        // // alert($(htmldata).find(".article__img-container img").attr("src"));
+        // alert($(res).find(".article__img-container img").attr("src"));
+    });
+    // }
 
     document.addEventListener("mouseup", function() {
             if (window.getSelection().toString() != null && window.getSelection().toString().trim() != "") {

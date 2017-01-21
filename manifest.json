@@ -33,7 +33,7 @@
     // content_scripts，在各个浏览器页面里运行的文件，可以获取到当前页面的上下文DOM
     "content_scripts": [{
         // matches 匹配 content_scripts 可以在哪些页面运行
-        "matches": ["http://*/*", "https://*/*"],
+        "matches": ["http://www.theguardian.com/*", "https://www.theguardian.com/*"],
         "js": ["scripts/lib/jquery.js", "scripts/util.js", "scripts/content_script.js", "scripts/read_view.js"],
         // "js": ["js/vendor/jquery-3.1.1.min.js", "js/vendor/keyboard.min.js", "js/selection.js", "js/notification.js"],
         "css": ["css/style.css", "css/word-box.css", "css/iconfont.css"]
