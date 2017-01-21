@@ -31,26 +31,31 @@ $(document).ready(function() {
             var htmldata = res;
             console.log(htmldata);
             console.log($(htmldata).find(".content__headline").text());
-
+            // alert($(htmldata).find(".article__img-container img").attr("src"));
             var doc = '<div class="read-wraper">' +
                 '<div class="read-view">' +
                 '<h1 class="news-title">' + $(htmldata).find(".content__headline").text() + '</h1>' +
                 '<p class="news-abstract">' + $(htmldata).find(".content__standfirst>p").text() + '</p>' +
+
                 '<div class="news-content"></div>' +
                 '</div>' +
                 '</div>';
 
             $("body").append(doc);
             var $content = $(htmldata).find(".content__article-body");
+            var $picture = $(htmldata).find(".article__img-container picture");
             // ' + $(htmldata).find(".content__article-body>p").text() + '
             $(".news-content").append($content);
 
+            $(".news-abstract").after($picture);
+
+
             $("aside").remove();
-
+            // '<img src="#"/>' +
+            // $("img").attr("src", $(htmldata).find(".article__img-container img").attr("src"));
+            // // alert($(htmldata).find(".article__img-container img").attr("src"));
+            // alert($(res).find(".article__img-container img").attr("src"));
         });
-
-
-
     }
 
     document.addEventListener("mouseup", function() {
