@@ -1,6 +1,6 @@
 .word-box {
-    width: 200px;
-    height: 100px;
+    max-width: 200px;
+    min-height: 100px;
     border-radius: 8px;
     padding: 12px;
     background-color: wheat;
@@ -57,5 +57,4 @@
 
 .cn-definition {
     margin-top: -5px;
-    /*font-size: 1rem;*/
 }

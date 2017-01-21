@@ -1,7 +1,5 @@
 (function(window, jQuery, undefined) {
 
-
-
     function WordBox(data) {
         this.data = data;
     }
