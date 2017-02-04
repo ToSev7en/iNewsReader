@@ -46,20 +46,22 @@
         // persistent代表“是否持久”。如果是一个单纯的全局后台js，需要一直运行，则不需配置persistent（或者为true）。当配置为false时转变为事件js，依旧存在于后台，在需要时加载，空闲时卸载
         "persistent": false
     },
+
     // browser_action，左键点击右上角插件logo时，弹出的popup框。不填此项则点击logo不会有用
     "browser_action": {
         "default_icon": "images/icon_48.png",
         "default_popup": "popup.html",
         "default_title": "Toggle Read Mode."
     },
+
     // options_page，指右键点击右上角里的插件logo时，弹出列表中的“选项”是否可点，以及在可以点击时，左键点击后打开的页面
     "options_page": "view/options.html",
+
     //权限声明
     "permissions": [
         "activeTab",
         "tabs",
         "tts",
         "https://api.shanbay.com/"
-        // "http://api.flickr.com/"
     ]
 }

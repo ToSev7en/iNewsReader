@@ -1,9 +1,7 @@
 'use strict';
 
 $(document).ready(function() {
-    // window.onload = function() {
 
-    // if (document.URL == "https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders") {
     window.stop();
 
     if (document.readyState == 'complete') {
@@ -27,8 +25,6 @@ $(document).ready(function() {
         $(list[i]).remove();
     }
 
-    // let htmldata;
-    // 'https://www.theguardian.com/politics/2015/may/28/david-cameron-sets-off-on-mission-to-win-over-european-leaders'
     Util.httpRequest(document.URL, function(res) {
         var htmldata = res;
         console.log(htmldata);
@@ -53,12 +49,8 @@ $(document).ready(function() {
 
 
         $("aside").remove();
-        // '<img src="#"/>' +
-        // $("img").attr("src", $(htmldata).find(".article__img-container img").attr("src"));
-        // // alert($(htmldata).find(".article__img-container img").attr("src"));
-        // alert($(res).find(".article__img-container img").attr("src"));
+
     });
-    // }
 
     document.addEventListener("mouseup", function() {
             if (window.getSelection().toString() != null && window.getSelection().toString().trim() != "") {
@@ -103,8 +95,6 @@ $(document).ready(function() {
                     // if (wb.length === 0) {
                     body.append(HTML);
                     var $wb = jQuery(".word-box");
-                    // alert(window.getSelection().focusOffset);
-                    // console.log(window.getSelection().offset());
                     var pos = {
                         top: 0,
                         left: 0
